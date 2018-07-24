@@ -1,4 +1,6 @@
 //插入排序
+//稳定排序
+//时间复杂度O(n^2)
 const Insertion = {
     show (a) {
         console.log(a);

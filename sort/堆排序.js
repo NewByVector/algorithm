@@ -1,7 +1,7 @@
-//选择排序
+//堆排序
 //非稳定排序
-//时间复杂度O(n^2)
-const Selection = {
+//时间复杂度O(nlogn)
+const Heap = {
     show (a) {
         console.log(a);
     },
@@ -24,15 +24,24 @@ const Selection = {
         return true;
     },
     sort (a) {
-        const len = a.length;
-        for (let i = 0; i < len; i++) {
-            let min = i;
-            for (let j = i + 1; j < len; j++) {
-                if (this.less(a[j], a[min])) {
-                    min = j;
-                }
-            }
-            this.exch(a, i, min);
+        var N = a.length;
+        a.unshift(0);  //推排序从1开始
+        for (var k = Math.floor(N / 2); k >=1; k--) {
+            this.sink(a, k, N);
+        }
+        while(N > 1) {
+            this.exch(a, 1, N--);
+            this.sink(a, 1, N);
+        }
+        a.shift();
+    },
+    sink (a, k, N){
+        while(2 * k <= N) {
+            var j = 2 * k;
+            if (j < N && this.less(a[j], a[j + 1])) j++;
+            if (!this.less(a[k], a[j])) break;
+            this.exch(a, k, j);
+            k = j;
         }
     },
     main () {
@@ -45,3 +54,5 @@ const Selection = {
         this.show(a);
     }
 };
+
+Heap.main();
