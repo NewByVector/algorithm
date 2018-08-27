@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "启动程序",
-            "program": "${workspaceFolder}/sort\\归并排序.js"
+            "program": "${workspaceFolder}/find\\二分查找.js"
         }
     ]
 }
