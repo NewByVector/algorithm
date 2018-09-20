@@ -6,7 +6,7 @@ class BinarySearchST {
         this.N = 0;
     }
     compareTo(v1, v2) {
-        return v1.charCodeAt(0) - v2.charCodeAt(0);
+        return v1.localeCompare(v2);
     }
     get (key) {
         if (this.N === 0) {

@@ -8,7 +8,7 @@
             "type": "node",
             "request": "launch",
             "name": "启动程序",
-            "program": "${workspaceFolder}/find\\二分查找.js"
+            "program": "${workspaceFolder}/find\\二叉树查找.js"
         }
     ]
 }
