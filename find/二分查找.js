@@ -25,7 +25,7 @@ class BinarySearchST {
             this.values[i] = value;
             return;
         }
-        for (let j = this.N; j > i; j++) {
+        for (let j = this.N; j > i; j--) {
             this.keys[j] = this.keys[j - 1];
             this.values[j] = this.values[j - 1];
         }
