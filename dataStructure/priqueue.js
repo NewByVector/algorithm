@@ -1,32 +1,28 @@
 //优先队列
 class priqueue {
-    constructor() {
+    constructor () {
         this.n = 0;
         //优先队列从1开始存储数据
         this.x = [];
     }
 
-    swap(i, j) {
+    swap (i, j) {
         const t = this.x[i];
-        this.x[i] = this.x[j];
+        this.x[i] = this.x[j]; 
         this.x[j] = t;
     }
 
-    insert(t) {
-        this.x[++this.n] = t;
-        let i, p;
-        for (i = this.n; i > 1 && this.x[p = Math.floor(i / 2)] > this.x[i]; i = p) {
+    siftup (n) {
+        let p;
+        for (let i = n; i > 1 && this.x[p = Math.floor(i / 2)] > this.x[i]; i = p) {
             this.swap(p, i);
         }
     }
 
-    extractmin() {
-        const t = this.x[1];
-        this.x[1] = this.x[this.n--];
-        let i, c;
-        for (i = 1;
-            (c = i * 2) <= this.n; i = c) {
-            if (c + 1 <= this.n && this.x[c + 1] < this.x[c]) {
+    siftdown (n) {
+        let c;
+        for (let i = 1; (c = i * 2) <= n; i = c) {
+            if (c + 1 <= n && this.x[c + 1] < this.x[c]) {
                 c++;
             }
             if (this.x[i] <= this.x[c]) {
@@ -34,6 +30,17 @@ class priqueue {
             }
             this.swap(c, i);
         }
+    }
+
+    insert (t) {
+        this.x[++this.n] = t;
+        this.siftup(this.n);
+    }
+
+    extractmin () {
+        const t = this.x[1];
+        this.x[1] = this.x[this.n--];
+        this.siftdown(this.n);
         return t;
     }
 }
