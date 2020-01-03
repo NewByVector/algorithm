@@ -2,18 +2,18 @@
 //非稳定排序
 //时间复杂度O(nlogn)
 const Heap = {
-    show (a) {
+    show(a) {
         console.log(a);
     },
-    less (v, w) {
+    less(v, w) {
         return v < w;
     },
-    exch (a, i, j) {
+    exch(a, i, j) {
         let t = a[i];
         a[i] = a[j];
         a[j] = t;
     },
-    isSorted (a) {
+    isSorted(a) {
         for (let i = 1; i < a.length; i++) {
             if (this.less(a[i], a[i - 1])) {
                 console.log('sorted failed');
@@ -23,35 +23,43 @@ const Heap = {
         console.log('sorted success');
         return true;
     },
-    sort (a) {
+    sort(a) {
         var N = a.length;
-        a.unshift(0);  //推排序从1开始
-        for (var k = Math.floor(N / 2); k >=1; k--) {
-            this.sink(a, k, N);
+        a.unshift(0); //推排序从1开始
+        for (let i = 2; i <= N; i++) {
+            this.siftup(a, i);
         }
-        while(N > 1) {
-            this.exch(a, 1, N--);
-            this.sink(a, 1, N);
-        }
-        a.shift();
-    },
-    sink (a, k, N){
-        while(2 * k <= N) {
-            var j = 2 * k;
-            if (j < N && this.less(a[j], a[j + 1])) j++;
-            if (!this.less(a[k], a[j])) break;
-            this.exch(a, k, j);
-            k = j;
+        for (let i = N; i >= 2; i--) {
+            this.exch(a, 1, i);
+            this.siftdown(a, i - 1);
         }
     },
-    main () {
+    siftup(a, n) {
+        let p;
+        for (let i = n; i > 1 && a[p = Math.floor(i / 2)] < a[i]; i = p) {
+            this.exch(a, p, i);
+        }
+    },
+    siftdown(a, n) {
+        let c;
+        for (let i = 1;
+            (c = i * 2) <= n; i = c) {
+            if (c + 1 <= n && a[c + 1] > a[c]) {
+                c++;
+            }
+            if (a[i] >= a[c]) {
+                break;
+            }
+            this.exch(a, c, i);
+        }
+    },
+    main() {
         let a = [];
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 1000000; i++) {
             a[i] = Math.random();
         }
         this.sort(a);
         this.isSorted(a);
-        this.show(a);
     }
 };
 
